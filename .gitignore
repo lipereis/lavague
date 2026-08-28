@@ -1,0 +1,83 @@
+# LA VAGUE Bot — .gitignore
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.env
+*.key
+*.pem
+*.crt
+
+# Hermes Runtime
+.hermes/
+~/.hermes/
+%APPDATA%\hermes\
+hermes-state/
+*.db
+*.db-wal
+*.db-shm
+*.log
+logs/
+*.sqlite
+
+# Obsidian Vault (local only)
+*.obsidian/
+.vault/
+.vault-backup/
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+pip-wheel-metadata/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
+
+# Build & Dist
+dist/
+build/
+*.egg-info/
+*.whl
+*.tar.gz
+
+# CI/CD
+.github/workflows/*.yml.bak
+
+# Temporary
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+
+# IDE
+.cursor/
+.idea/
+*.sublime-project
+*.sublime-workspace

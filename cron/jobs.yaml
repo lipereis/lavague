@@ -1,0 +1,121 @@
+# LA VAGUE Bot — Cron Job Definitions
+# These can be imported via: hermes cronjob create --from-file cron/jobs.yaml
+# Or created individually with: hermes cronjob create --name NAME --schedule SCHEDULE --prompt PROMPT
+
+jobs:
+  # ==========================================
+  # DAILY RADAR SWEEP (Core)
+  # ==========================================
+  - name: "la-vague-daily-radar"
+    schedule: "0 9 * * *"  # Daily 09:00
+    prompt: |
+      Run LA VAGUE radar sweep: scan Criterion Daily, MUBI Notebook, SSENSE Editorial, Dazed Digital, Highsnobiety, Crack Magazine for cinema/fashion/music intersections from the last 24-48 hours.
+
+      Produce 4 editorial drafts (Instagram carousel + Substack essay each) with:
+      - Cover hook, visual direction, 4-slide breakdown, caption (PT-BR)
+      - Substack essay prompt with working title + thesis
+      - Source citations with URLs
+
+      Save all drafts to Obsidian vault with wiki-links to [[LA VAGUE Radar]], [[Editorial Calendar]], [[Visual References]].
+      Tag with #cinema #fashion #music #radar #draft
+
+      Send Discord digest to #general with top 3 intersections.
+    skills:
+      - la-vague-radar-curator
+      - obsidian
+      - youtube-content
+      - competitor-news-monitor
+    deliver: "discord:#general"
+
+  # ==========================================
+  # WEEKLY EDITORIAL REVIEW (Friday)
+  # ==========================================
+  - name: "la-vague-weekly-review"
+    schedule: "0 10 * * 5"  # Friday 10:00
+    prompt: |
+      Review this week's radar drafts in [[LA VAGUE Radar]] and [[Editorial Calendar]].
+
+      Select top 3 intersections based on:
+      - Cultural relevance / timeliness
+      - Visual strength (carousel potential)
+      - Cross-disciplinary depth (cinema+fashion+music)
+      - Audience engagement potential
+
+      Update [[Editorial Calendar]] with status: "selected" for chosen drafts, "archived" for others.
+
+      Send Discord notification to #general with selected drafts and links.
+    skills:
+      - obsidian
+    deliver: "discord:#general"
+
+  # ==========================================
+  # AUTO-POST APPROVED CONTENT (Friday Afternoon)
+  # ==========================================
+  - name: "la-vague-auto-post"
+    schedule: "0 14 * * 5"  # Friday 14:00
+    prompt: |
+      Check [[Editorial Calendar]] for items with status "approved".
+
+      For each approved item:
+      1. Post Instagram carousel (if visual assets ready) → deliver to instagram
+      2. Post Substack essay (if drafted) → deliver to substack
+      3. Post to Discord #la-vague-content with formatted announcement
+
+      Update [[Editorial Calendar]] status to "published" with timestamp and URLs.
+
+      Send summary to Discord #la-vague-logs.
+    skills:
+      - obsidian
+    deliver: "discord:#la-vague-logs,instagram,substack"
+
+  # ==========================================
+  # DAILY DIGEST (Morning)
+  # ==========================================
+  - name: "la-vague-daily-digest"
+    schedule: "0 8 * * *"  # Daily 08:00
+    prompt: |
+      Send concise daily LA VAGUE digest to Discord #general:
+
+      1. Today's editorial focus (from radar sweep)
+      2. Upcoming deadlines from [[Editorial Calendar]]
+      3. Quick cultural pulse: 1-sentence on cinema/fashion/music news
+
+      Keep under 300 words. Professional, concise tone.
+    skills:
+      - obsidian
+    deliver: "discord:#general"
+
+  # ==========================================
+  # MONTHLY ARCHIVE (1st of month)
+  # ==========================================
+  - name: "la-vague-monthly-archive"
+    schedule: "0 12 1 * *"  # 1st of month, 12:00
+    prompt: |
+      Archive last month's radar drafts in Obsidian:
+      - Move drafts from [[LA VAGUE Radar]] to [[Archive/YYYY-MM]]
+      - Update [[Editorial Calendar]] with monthly stats:
+        * Total drafts produced
+        * Published vs archived
+        * Top performing intersections
+      - Send monthly report to Discord #la-vague-logs
+    skills:
+      - obsidian
+    deliver: "discord:#la-vague-logs"
+
+# ==========================================
+# Usage
+# ==========================================
+# Create all jobs:
+#   hermes cronjob create --from-file cron/jobs.yaml
+#
+# Or create individually:
+#   hermes cronjob create --name la-vague-daily-radar --schedule "0 9 * * *" --prompt "..." --skills "la-vague-radar-curator,obsidian" --deliver "discord:#general"
+#
+# List all:
+#   hermes cronjob list
+#
+# Run manually:
+#   hermes cronjob run --job-id la-vague-daily-radar
+#
+# View logs:
+#   hermes cronjob log --job-id la-vague-daily-radar --follow
