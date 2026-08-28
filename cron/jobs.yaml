@@ -4,7 +4,7 @@
 
 jobs:
   # ==========================================
-  # DAILY RADAR SWEEP (Core)
+  # DAILY RADAR SWEEP (Core) — Full Drafts to Discord
   # ==========================================
   - name: "la-vague-daily-radar"
     schedule: "0 9 * * *"  # Daily 09:00
@@ -19,13 +19,60 @@ jobs:
       Save all drafts to Obsidian vault with wiki-links to [[LA VAGUE Radar]], [[Editorial Calendar]], [[Visual References]].
       Tag with #cinema #fashion #music #radar #draft
 
-      Send Discord digest to #general with top 3 intersections.
+      **POST FULL DRAFTS TO DISCORD #la-vague-radar:**
+      For each of the 4 drafts, post a separate Discord message to #la-vague-radar with:
+      
+      **Message 1 — Radar Header:**
+      ```
+      🌊 **LA VAGUE — RADAR SWEEP** — $(date +%Y-%m-%d)
+      
+      4 new intersections discovered across cinema, fashion & music.
+      ```
+      
+      **Messages 2-5 — Each Draft (one message per draft):**
+      ```
+      📋 **DRAFT N: [Topic Title]**
+      
+      **Source:** [Publication] — [URL]
+      
+      **Core Angle:** [1-2 sentences why this fits LA VAGUE]
+      
+      ---
+      
+      **📸 INSTAGRAM CAROUSEL**
+      **Cover Hook:** [Cover Hook Text]
+      **Visual Direction:** [Visual Direction]
+      
+      **Slide 1:** [Headline + punchline]
+      **Slide 2:** [Key insight / Visual analysis]
+      **Slide 3:** [Fashion/Music/Cinema connection]
+      **Slide 4:** [Deep-dive context / Quote / Closing thought]
+      
+      **Caption (PT-BR):**
+      [Full caption ready to copy/paste]
+      
+      ---
+      
+      **📝 SUBSTACK ESSAY PROMPT**
+      **Working Title:** [Essay Headline]
+      **Thesis:** [1-2 sentences]
+      
+      ---
+      
+      **Sources:** [List with URLs]
+      ```
+      
+      **Message 6 — Footer:**
+      ```
+      ✅ All drafts saved to Obsidian: [[LA VAGUE Radar]], [[Editorial Calendar]], [[Visual References]]
+      Tags: #cinema #fashion #music #radar #draft
+      ```
     skills:
       - la-vague-radar-curator
       - obsidian
       - youtube-content
       - competitor-news-monitor
-    deliver: "discord:#general"
+    deliver: "discord:#la-vague-radar"
 
   # ==========================================
   # WEEKLY EDITORIAL REVIEW (Friday)
